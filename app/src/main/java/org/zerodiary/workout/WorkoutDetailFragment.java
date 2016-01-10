@@ -16,6 +16,8 @@ public class WorkoutDetailFragment extends Fragment {
 
     private long workoutid;
 
+
+
     public WorkoutDetailFragment() {
         // Required empty public constructor
     }
@@ -24,7 +26,9 @@ public class WorkoutDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        if(savedInstanceState != null){
+            workoutid = savedInstanceState.getLong("workoutId");
+        }
         return inflater.inflate(R.layout.fragment_workout_detail, container, false);
     }
 
@@ -40,6 +44,12 @@ public class WorkoutDetailFragment extends Fragment {
             TextView description = (TextView)view.findViewById(R.id.description);
             description.setText(workout.getDescription());
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle instance){
+        super.onSaveInstanceState(instance);
+        instance.putLong("workoutId",workoutid);
     }
 
     public void setWorkout(long id){
